@@ -1,0 +1,46 @@
+app.module("Models", function (Models, app) {
+  Models.Board = Backbone.Model.extend({
+    defaults: {
+      board: "012345678"
+    },
+
+    rows: function () {
+      var b = this.get('board');
+      return [
+        b[0]+b[1]+b[2],
+        b[3]+b[4]+b[5],
+        b[6]+b[7]+b[8]
+      ];
+    },
+
+    columns: function () {
+      var b = this.get('board');
+      return [
+        b[0]+b[3]+b[6],
+        b[1]+b[4]+b[7],
+        b[2]+b[5]+b[8]
+      ];
+    },
+
+    diagnols: function () {
+      var b = this.get('board');
+      return [
+        b[0]+b[4]+b[8],
+        b[2]+b[4]+b[6]
+      ];
+    },
+
+    winner: function() {
+      var ranks = _.union(this.rows(), this.columns(), this.diagnols());
+      var winner = _.find(ranks, function(rank) {
+        if (rank === "XXX" || rank === "OOO") return true;
+      });
+      if (winner) return winner[0];
+    },
+
+    inspect: function() {
+      return this.rows().join("\n");
+    }
+
+  });
+});
