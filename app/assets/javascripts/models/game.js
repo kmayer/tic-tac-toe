@@ -1,5 +1,5 @@
 app.module("Models", function (Models, app) {
-  Models.Board = Backbone.Model.extend({
+  Models.Game = Backbone.Model.extend({
     defaults: {
       board: "012345678"
     },

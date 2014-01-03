@@ -1,6 +1,6 @@
-describe("Models.Board", function () {
+describe("Models.Game", function () {
   beforeEach(function () {
-    this.model = new app.Models.Board();
+    this.model = new app.Models.Game();
   });
 
   it("has an inspect", function() {
@@ -31,23 +31,23 @@ describe("Models.Board", function () {
 
   describe("winning", function() {
     it("has no winners", function() {
-      this.model = new app.Models.Board({board: "012345678"});
+      this.model = new app.Models.Game({board: "012345678"});
       expect(this.model.winner()).toBeUndefined();
     });
 
     _.each(["X", "O"], function(X) {
       it("when there's a winning row for "+X, function() {
-        this.model = new app.Models.Board({board: "eee345678".replace(/e/g, X)});
+        this.model = new app.Models.Game({board: "eee345678".replace(/e/g, X)});
         expect(this.model.winner()).toBe(X);
       });
 
       it("when there's a winning column for "+X, function() {
-        this.model = new app.Models.Board({board: "e12e45e78".replace(/e/g, X)});
+        this.model = new app.Models.Game({board: "e12e45e78".replace(/e/g, X)});
         expect(this.model.winner()).toBe(X);
       });
 
       it("when there's a winning diagnol for "+X, function() {
-        this.model = new app.Models.Board({board: "e123e567e".replace(/e/g, X)});
+        this.model = new app.Models.Game({board: "e123e567e".replace(/e/g, X)});
         expect(this.model.winner()).toBe(X);
       });
     });
