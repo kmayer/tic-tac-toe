@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require underscore
+//= require backbone
+//= require backbone.marionette
+//= require tic-tac-toe
+//= require_tree ./models
