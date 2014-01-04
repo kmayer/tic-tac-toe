@@ -52,4 +52,71 @@ describe("Models.Game", function () {
       });
     });
   });
+
+  describe("turns", function() {
+    it("starts with 'X'", function() {
+      this.model.turn(0);
+
+      expect(this.model.get('board')).toBe("X12345678");
+    });
+
+    it("changes players with each turn", function() {
+      this.model.turn(0);
+      this.model.turn(1);
+
+      expect(this.model.get('board')).toBe("XO2345678");
+    });
+
+    it("won't overwrite a previous move", function() {
+      this.model.turn(0);
+      this.model.turn(0);
+      this.model.turn(1);
+
+      expect(this.model.get('board')).toBe("XO2345678");
+    })
+  });
+
+  it("a simple game where 'X' wins", function() {
+    this.model.turn(0); // X| |
+                        // -+-+-
+                        //  | |
+                        // -+-+-
+                        //  | |
+
+    expect(this.model.winner()).toBeUndefined();
+
+    this.model.turn(2); // X| |O
+                        // -+-+-
+                        //  | |
+                        // -+-+-
+                        //  | |
+
+    expect(this.model.winner()).toBeUndefined();
+
+    this.model.turn(4); // X| |
+                        // -+-+-
+                        //  |X|
+                        // -+-+-
+                        //  | |
+
+    expect(this.model.winner()).toBeUndefined();
+
+    this.model.turn(1); // X|O|O
+                        // -+-+-
+                        //  |X|
+                        // -+-+-
+                        //  | |
+
+    expect(this.model.winner()).toBeUndefined();
+
+    this.model.turn(8); // X|O|O
+                        // -+-+-
+                        //  |X|
+                        // -+-+-
+                        //  | |X
+
+    expect(this.model.winner()).toBe("X");
+
+    expect(this.model.get('board')).toBe("XOO3X567X");
+  });
 });

@@ -1,7 +1,8 @@
 app.module("Models", function (Models, app) {
   Models.Game = Backbone.Model.extend({
     defaults: {
-      board: "012345678"
+      board: "012345678",
+      nextPlayer: "O"
     },
 
     rows: function () {
@@ -40,6 +41,20 @@ app.module("Models", function (Models, app) {
 
     inspect: function() {
       return this.rows().join("\n");
+    },
+
+    turn: function(position) {
+      var board = this.get('board').split('');
+      if (board[position].search(/\d/) === 0) {
+        board[position] = this.nextPlayer();
+        this.set('board', board.join(''));
+      }
+    },
+
+    nextPlayer: function() {
+      var nextPlayer = (this.get('nextPlayer') == "X") ? "O" : "X";
+      this.set('nextPlayer', nextPlayer);
+      return nextPlayer;
     }
 
   });
