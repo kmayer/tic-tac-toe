@@ -1,59 +1,56 @@
 app.module("Models", function (Models, app) {
-  Models.Player = Backbone.Model.extend({
-    defaults: {
-      player: "X"
-    },
+  Models.Player = (function() {
+    return Backbone.Model.extend({
+      tactics: ['arg', 'win_game', 'not_lose', 'default'],
 
-    tactics: ['arg', 'win_game', 'not_lose', 'default'],
+      move: function(pos) {
+        var player = this;
 
-    move: function(pos) {
-      var player = this;
+        var position = _.chain(this.tactics)
+          .map(function(tactic) { return player[tactic].call(player, pos); })
+          .reject(function(p) { return p === undefined; })
+          .value()[0];
+        this.get('game').turn(position);
+      },
 
-      var position = _.chain(this.tactics)
-        .map(function(tactic) { return player[tactic].call(player, pos); })
-        .reject(function(p) { return p === undefined; })
-        .value()[0];
-      this.get('game').turn(position);
-    },
+      /* TACTICS */
+      arg: function(position) {
+        return position;
+      },
 
-    find_runs: function(array, player) {
-      var index;
-      var regex = RegExp(player, "g");
-      _.find(array, function(rank, i) {
-        if (rank.replace(regex, '').length == 1) return index = i;
-      });
-      return index;
-    },
+      default: function() {
+        var openSlots = this.get('game').get('board').match(/\d/g);
+        return Number(openSlots[_.random(openSlots.length - 1)]);
+      },
 
-    find_slot: function(rank) {
-      return Number(rank.match(/\d/));
-    },
+      win_game: function() {
+        return find_run_with(this, "X");
+      },
 
-    arg: function(position) {
-      return position;
-    },
-
-    default: function() {
-      var openSlots = this.get('game').get('board').match(/\d/g);
-      return Number(openSlots[_.random(openSlots.length - 1)]);
-    },
-
-    win_game: function() {
-      var ranks = this.get('game').ranks();
-      var index = this.find_runs(ranks, "X");
-      if (index !== undefined) {
-        return this.find_slot(ranks[index])
+      not_lose: function() {
+        return find_run_with(this, "O");
       }
-    },
+    });
+  })();
 
-    not_lose: function() {
-      var ranks = this.get('game').ranks();
-      var index = this.find_runs(ranks, "O");
-      if (index !== undefined) {
-        return this.find_slot(ranks[index])
-      }
-    },
+  function find_slot(rank) {
+    return Number(rank.match(/\d/));
+  }
 
-  });
+  function find_runs(array, player) {
+    var index;
+    var regex = RegExp(player, "g");
+    _.find(array, function(rank, i) {
+      if (rank.replace(regex, '').length == 1) return index = i;
+    });
+    return index;
+  }
+
+  function find_run_with(model, letter) {
+    var ranks = model.get('game').ranks();
+    var index = find_runs(ranks, letter);
+    if (index !== undefined) {
+      return find_slot(ranks[index])
+    }
+  }
 });
-

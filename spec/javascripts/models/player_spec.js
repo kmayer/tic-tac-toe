@@ -10,10 +10,6 @@ describe("Models.Player", function () {
     expect(this.game.get('board')).toBe("X12345678");
   });
 
-  it("knows which player it is", function() {
-    expect(this.model.get('player')).toBe("X");
-  });
-
   describe("tactics", function() {
     it("will block ranks", function() {
       this.game.set({board: "012O4O678"});
