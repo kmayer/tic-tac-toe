@@ -11,37 +11,25 @@ describe("Models.Game", function () {
     it("has status in each row", function () {
       var rows = this.model.rows();
 
-      expect(rows[0]).toBe("012");
-      expect(rows[1]).toBe("345");
-      expect(rows[2]).toBe("678");
+      expect(rows).toMatch(["012", "345", "678"]);
     });
 
     it("has status in each column", function() {
       var cols = this.model.columns();
 
-      expect(cols[0]).toBe("036");
-      expect(cols[1]).toBe("147");
-      expect(cols[2]).toBe("258");
+      expect(cols).toMatch(["036", "147", "258"])
     });
 
     it("has status in each diagnol", function() {
       var diags = this.model.diagnols();
 
-      expect(diags[0]).toBe("048");
-      expect(diags[1]).toBe("246");
+      expect(diags).toMatch(["048", "246"]);
     });
 
     it("has status for all ranks", function() {
       var ranks = this.model.ranks();
 
-      expect(ranks[0]).toBe("012");
-      expect(ranks[1]).toBe("345");
-      expect(ranks[2]).toBe("678");
-      expect(ranks[3]).toBe("036");
-      expect(ranks[4]).toBe("147");
-      expect(ranks[5]).toBe("258");
-      expect(ranks[6]).toBe("048");
-      expect(ranks[7]).toBe("246");
+      expect(ranks).toMatch(["012", "345", "678", "036", "147", "258", "048", "246"]);
     });
   });
 
