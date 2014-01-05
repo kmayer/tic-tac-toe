@@ -12,4 +12,15 @@ describe("GamesModule.Controller", function() {
     expect(this.controller.game.turn).toHaveBeenCalledWith(0);
   });
 
+  it("detects winning games", function() {
+    this.controller.game.set('board', "XOO3X5678");
+
+    var spy = jasmine.createSpy('winner');
+    app.vent.on("winner", spy);
+
+    this.controller.takeTurn(8);
+
+    expect(spy).toHaveBeenCalledWith("X");
+  });
+
 });
