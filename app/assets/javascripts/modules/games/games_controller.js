@@ -1,13 +1,14 @@
 app.module("GamesModule", function(thisModule, thisApp) {
   thisModule.Controller = Marionette.Controller.extend({
-    initialize: function() {
-      console.log("games!");
+    new: function() {
+      this.game = new app.Models.Game();
+      var gameView = new app.GamesModule.GameView({model: this.game});
+      this.listenTo(gameView, "take:turn", this.takeTurn, this);
+      thisApp.gameRegion.show(gameView);
     },
 
-    new: function() {
-      var game = new app.Models.Game();
-      var gameView = new app.GamesModule.GameView({model: game});
-      thisApp.gameRegion.show(gameView);
+    takeTurn: function(position) {
+      this.game.turn(position);
     }
 
   });
