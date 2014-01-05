@@ -31,8 +31,12 @@ app.module("Models", function (Models, app) {
       ];
     },
 
+    ranks: function() {
+      return _.union(this.rows(), this.columns(), this.diagnols());
+    },
+
     winner: function() {
-      var ranks = _.union(this.rows(), this.columns(), this.diagnols());
+      var ranks = this.ranks();
       var winner = _.find(ranks, function(rank) {
         if (rank === "XXX" || rank === "OOO") return true;
       });
