@@ -2,7 +2,7 @@ app.module("Models", function (Models, app) {
   Models.Game = Backbone.Model.extend({
     defaults: {
       board: "012345678",
-      nextPlayer: "O"
+      thisPlayer: "X"
     },
 
     rows: function () {
@@ -52,9 +52,9 @@ app.module("Models", function (Models, app) {
     },
 
     nextPlayer: function() {
-      var nextPlayer = (this.get('nextPlayer') == "X") ? "O" : "X";
-      this.set('nextPlayer', nextPlayer);
-      return nextPlayer;
+      var thisPlayer = this.get('thisPlayer');
+      this.set('thisPlayer',((thisPlayer === "X") ? "O" : "X"));
+      return thisPlayer;
     }
 
   });
