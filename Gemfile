@@ -31,6 +31,7 @@ gem 'underscore-rails'
 gem 'backbone-rails'
 gem 'marionette-rails'
 gem 'bootstrap-sass-rails'
+gem 'handlebars_assets'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

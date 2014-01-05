@@ -15,5 +15,7 @@
 //= require underscore
 //= require backbone
 //= require backbone.marionette
+//= require handlebars.runtime
 //= require tic-tac-toe
+//= require_tree ./templates
 //= require_tree ./models
