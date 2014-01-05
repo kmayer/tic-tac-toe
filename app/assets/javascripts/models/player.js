@@ -4,7 +4,7 @@ app.module("Models", function (Models, app) {
       player: "X"
     },
 
-    tactics: ['arg', 'win_game', 'not_lose'],
+    tactics: ['arg', 'win_game', 'not_lose', 'default'],
 
     move: function(pos) {
       var player = this;
@@ -31,6 +31,11 @@ app.module("Models", function (Models, app) {
 
     arg: function(position) {
       return position;
+    },
+
+    default: function() {
+      var openSlots = this.get('game').get('board').match(/\d/g);
+      return Number(openSlots[_.random(openSlots.length - 1)]);
     },
 
     win_game: function() {
