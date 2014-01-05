@@ -49,7 +49,7 @@ app.module("Models", function (Models, app) {
 
     turn: function(position) {
       var board = this.get('board').split('');
-      if (board[position].search(/\d/) === 0) {
+      if (board[position] == position) {
         board[position] = this.nextPlayer();
         this.set('board', board.join(''));
       }
