@@ -23,7 +23,7 @@ describe("Models.Player", function () {
       expect(this.game.get('board')).toBe("012OXO678");
     });
 
-    it("win the game", function() {
+    it("will win the game", function() {
       this.game.set({board: "0X23456X8"});
 
       this.model.move();

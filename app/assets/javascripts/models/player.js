@@ -16,10 +16,6 @@ app.module("Models", function (Models, app) {
       this.get('game').turn(position);
     },
 
-    arg: function(position) {
-      return position;
-    },
-
     find_runs: function(array, player) {
       var index;
       var regex = RegExp(player, "g");
@@ -33,12 +29,8 @@ app.module("Models", function (Models, app) {
       return Number(rank.match(/\d/));
     },
 
-    not_lose: function() {
-      var ranks = this.get('game').ranks();
-      var index = this.find_runs(ranks, "O");
-      if (index !== undefined) {
-        return this.find_slot(ranks[index])
-      }
+    arg: function(position) {
+      return position;
     },
 
     win_game: function() {
@@ -47,7 +39,15 @@ app.module("Models", function (Models, app) {
       if (index !== undefined) {
         return this.find_slot(ranks[index])
       }
-    }
+    },
+
+    not_lose: function() {
+      var ranks = this.get('game').ranks();
+      var index = this.find_runs(ranks, "O");
+      if (index !== undefined) {
+        return this.find_slot(ranks[index])
+      }
+    },
 
   });
 });
