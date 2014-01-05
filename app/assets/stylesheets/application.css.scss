@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+@import "bootstrap-custom";
+
+.table-cell-hover > tbody {
+  > tr > td:hover {
+    background-color: darken($table-bg-active, 5%);
+  }
+}

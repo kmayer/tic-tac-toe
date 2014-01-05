@@ -1,1 +1,3 @@
-window.app = new Marionette.Application();
+window.app = (function() {
+  return new Marionette.Application();
+})();

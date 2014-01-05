@@ -29,6 +29,9 @@ GEM
     atomic (1.1.14)
     backbone-rails (1.0.0.1)
       rails (>= 3.0.0)
+    bootstrap-sass-rails (3.0.3.0)
+      railties (>= 3.1.0)
+      sass-rails (>= 3.1.0)
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -134,6 +137,7 @@ PLATFORMS
 
 DEPENDENCIES
   backbone-rails
+  bootstrap-sass-rails
   coffee-rails (~> 4.0.0)
   jasmine
   jbuilder (~> 1.2)

@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'underscore-rails'
 gem 'backbone-rails'
 gem 'marionette-rails'
+gem 'bootstrap-sass-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

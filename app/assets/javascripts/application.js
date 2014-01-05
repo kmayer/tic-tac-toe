@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-custom
 //= require underscore
 //= require backbone
 //= require backbone.marionette
