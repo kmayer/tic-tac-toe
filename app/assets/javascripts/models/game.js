@@ -41,6 +41,7 @@ app.module("Models", function (Models, app) {
         if (rank === "XXX" || rank === "OOO") return true;
       });
       if (winner) return winner[0];
+      if (this.get('board').search(/\d/) == -1) return "DRAW";
     },
 
     inspect: function() {

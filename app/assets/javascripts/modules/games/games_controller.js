@@ -2,6 +2,7 @@ app.module("GamesModule", function(thisModule, thisApp) {
   thisModule.Controller = Marionette.Controller.extend({
     initialize: function() {
       app.vent.on("winner", this.announceWinner);
+      app.vent.on("draw", this.announceDraw);
     },
 
     new: function() {
@@ -14,13 +15,20 @@ app.module("GamesModule", function(thisModule, thisApp) {
     takeTurn: function(position) {
       this.game.turn(position);
       var winner = this.game.winner();
-      if (winner) app.vent.trigger("winner", winner);
+      if (winner === "DRAW") {
+        app.vent.trigger("draw");
+      } else if (winner) {
+        app.vent.trigger("winner", winner);
+      }
     },
 
     announceWinner: function(winner) {
       thisApp.alert('"' + winner +'" wins!');
     },
 
+    announceDraw: function() {
+      thisApp.alert("Draw.");
+    }
   });
 
   thisModule.addInitializer(function() {

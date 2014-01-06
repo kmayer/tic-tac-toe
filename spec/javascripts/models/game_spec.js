@@ -34,10 +34,16 @@ describe("Models.Game", function () {
   });
 
   describe("winning", function() {
-    it("has no winners", function() {
+    it("has no winners yet", function() {
       this.model = new app.Models.Game({board: "012345678"});
 
       expect(this.model.winner()).toBeUndefined();
+    });
+
+    it("announces a draw", function() {
+      this.model = new app.Models.Game({board: "XOXOOXXXO"})
+
+      expect(this.model.winner()).toBe("DRAW");
     });
 
     _.each(["X", "O"], function(X) {
