@@ -28,4 +28,13 @@ describe("Models.Player", function () {
       expect(this.game.winner()).toBe("X");
     });
   });
+  describe("bugs", function() {
+    it("should choose 8, not 0", function() {
+      this.game.set({board: "O12XO5X78", thisPlayer: "X"});
+
+      this.model.move();
+
+      expect(this.game.get('board')).toBe("O12XO5X7X");
+    });
+  });
 });

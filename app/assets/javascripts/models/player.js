@@ -34,7 +34,8 @@ app.module("Models", function (Models, app) {
   })();
 
   function find_slot(rank) {
-    return Number(rank.match(/\d/));
+    var position = rank.match(/\d/);
+    if (position) return Number(position);
   }
 
   function find_runs(array, player) {
