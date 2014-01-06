@@ -13,7 +13,3 @@ Mostly an experiment.
   * JSHint testing
 
 * Deploy to Heroku
-
-* Add "AI" player
-
-* Detect winning games more gracefully
