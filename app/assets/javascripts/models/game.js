@@ -1,66 +1,65 @@
 app.module("Models", function (Models, app) {
-  Models.Game = Backbone.Model.extend({
-    defaults: {
-      board: "012345678",
-      thisPlayer: "X"
-    },
+  Models.Game = (function() {
+    return Backbone.Model.extend({
+      defaults: {
+        board: "012345678",
+        thisPlayer: "X"
+      },
 
-    rows: function () {
-      var b = this.get('board');
-      return [
-        b[0]+b[1]+b[2],
-        b[3]+b[4]+b[5],
-        b[6]+b[7]+b[8]
-      ];
-    },
+      ranks: function() {
+        var board = this.get('board');
+        return _.union(rows(board), columns(board), diagonals(board));
+      },
 
-    columns: function () {
-      var b = this.get('board');
-      return [
-        b[0]+b[3]+b[6],
-        b[1]+b[4]+b[7],
-        b[2]+b[5]+b[8]
-      ];
-    },
+      winner: function() {
+        var ranks = this.ranks();
+        var winner = _.find(ranks, function(rank) {
+          if (rank === "XXX" || rank === "OOO") return true;
+        });
+        if (winner) return winner[0];
+        if (this.get('board').search(/\d/) == -1) return "DRAW";
+      },
 
-    diagnols: function () {
-      var b = this.get('board');
-      return [
-        b[0]+b[4]+b[8],
-        b[2]+b[4]+b[6]
-      ];
-    },
+      inspect: function() {
+        return rows(this.get('board')).join("\n");
+      },
 
-    ranks: function() {
-      return _.union(this.rows(), this.columns(), this.diagnols());
-    },
-
-    winner: function() {
-      var ranks = this.ranks();
-      var winner = _.find(ranks, function(rank) {
-        if (rank === "XXX" || rank === "OOO") return true;
-      });
-      if (winner) return winner[0];
-      if (this.get('board').search(/\d/) == -1) return "DRAW";
-    },
-
-    inspect: function() {
-      return this.rows().join("\n");
-    },
-
-    turn: function(position) {
-      var board = this.get('board').split('');
-      if (board[position] == position) {
-        board[position] = this.nextPlayer();
-        this.set('board', board.join(''));
+      turn: function(position) {
+        var board = this.get('board').split('');
+        if (board[position] == position) {
+          board[position] = nextPlayer(this);
+          this.set('board', board.join(''));
+        }
       }
-    },
+    });
+  })();
 
-    nextPlayer: function() {
-      var thisPlayer = this.get('thisPlayer');
-      this.set('thisPlayer',((thisPlayer === "X") ? "O" : "X"));
-      return thisPlayer;
-    }
+  function nextPlayer(model) {
+    var thisPlayer = model.get('thisPlayer');
+    model.set('thisPlayer',((thisPlayer === "X") ? "O" : "X"));
+    return thisPlayer;
+  }
 
-  });
+  function rows(b) {
+    return [
+      b[0]+b[1]+b[2],
+      b[3]+b[4]+b[5],
+      b[6]+b[7]+b[8]
+    ];
+  }
+
+  function columns(b) {
+    return [
+      b[0]+b[3]+b[6],
+      b[1]+b[4]+b[7],
+      b[2]+b[5]+b[8]
+    ];
+  }
+
+  function diagonals(b) {
+    return [
+      b[0]+b[4]+b[8],
+      b[2]+b[4]+b[6]
+    ];
+  }
 });

@@ -8,24 +8,6 @@ describe("Models.Game", function () {
   });
 
   describe("ranks and files", function() {
-    it("has status in each row", function () {
-      var rows = this.model.rows();
-
-      expect(rows).toMatch(["012", "345", "678"]);
-    });
-
-    it("has status in each column", function() {
-      var cols = this.model.columns();
-
-      expect(cols).toMatch(["036", "147", "258"])
-    });
-
-    it("has status in each diagnol", function() {
-      var diags = this.model.diagnols();
-
-      expect(diags).toMatch(["048", "246"]);
-    });
-
     it("has status for all ranks", function() {
       var ranks = this.model.ranks();
 
@@ -90,7 +72,7 @@ describe("Models.Game", function () {
     })
   });
 
-  it("a simple game where 'X' wins", function() {
+  it("plays a simple game where 'X' wins", function() {
     this.model.turn(0); // X| |
                         // -+-+-
                         //  | |
