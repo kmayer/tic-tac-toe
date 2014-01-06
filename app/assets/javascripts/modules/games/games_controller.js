@@ -3,12 +3,12 @@ app.module("GamesModule", function(thisModule, thisApp) {
     initialize: function() {
       app.vent.on("winner", this.announceWinner);
       app.vent.on("draw", this.announceDraw);
+      app.commands.setHandler("take:turn", this.takeTurn, this);
     },
 
     new: function() {
       this.game = new app.Models.Game();
       var gameView = new app.GamesModule.GameView({model: this.game});
-      this.listenTo(gameView, "take:turn", this.takeTurn, this);
       thisApp.gameRegion.show(gameView);
     },
 

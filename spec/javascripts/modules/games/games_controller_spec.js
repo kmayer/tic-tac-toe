@@ -7,7 +7,7 @@ describe("GamesModule.Controller", function() {
   it("listens to 'take:turn'", function() {
     spyOn(this.controller.game, "turn");
 
-    app.gameRegion.currentView.trigger("take:turn", 0);
+    app.execute("take:turn", 0);
 
     expect(this.controller.game.turn).toHaveBeenCalledWith(0);
   });

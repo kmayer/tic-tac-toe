@@ -18,7 +18,7 @@ app.module("GamesModule", function(thisModule, thisApp) {
     },
 
     cellClicked: function(event) {
-      this.trigger("take:turn", $(event.currentTarget).data('position'));
+      app.execute("take:turn", $(event.currentTarget).data('position'));
     }
   });
 });

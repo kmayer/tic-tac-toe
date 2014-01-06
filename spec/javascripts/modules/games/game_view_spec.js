@@ -11,7 +11,7 @@ describe("GamesModule.GameView", function() {
   it("triggers 'take:turn'", function() {
     var spy = jasmine.createSpy('click');
 
-    this.view.on("take:turn", spy)
+    app.commands.setHandler("take:turn", spy)
 
     this.view.render();
 
