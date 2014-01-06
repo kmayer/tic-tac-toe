@@ -36,5 +36,12 @@ describe("Models.Player", function () {
 
       expect(this.game.get('board')).toBe("O12XO5X7X");
     });
+    it("should choose 1, not 8", function() {
+      this.game.set({board: "O1OOXXX78", thisPlayer: "X"})
+
+      this.model.move();
+
+      expect(this.game.get('board')).toBe("OXOOXXX78");
+    });
   });
 });

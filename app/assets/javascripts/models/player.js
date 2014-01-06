@@ -48,7 +48,9 @@ app.module("Models", function (Models, app) {
   }
 
   function find_run_with(model, letter) {
-    var ranks = model.get('game').ranks();
+    var ranks = _.filter(model.get('game').ranks(), function(rank) {
+      return rank.match(/\d/);
+    });
     var index = find_runs(ranks, letter);
     if (index !== undefined) {
       return find_slot(ranks[index])
