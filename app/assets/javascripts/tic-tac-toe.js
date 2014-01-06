@@ -10,5 +10,7 @@ window.app = (function(Backbone, Marionette) {
       Backbone.history.start();
   });
 
+  app.alert = function(message) { alert.call(window, message); };
+
   return app;
 })(Backbone, Marionette);

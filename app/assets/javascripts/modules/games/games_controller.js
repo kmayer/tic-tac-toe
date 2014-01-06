@@ -18,8 +18,8 @@ app.module("GamesModule", function(thisModule, thisApp) {
     },
 
     announceWinner: function(winner) {
-      window.alert('"' + winner +'" wins!');
-    }
+      thisApp.alert('"' + winner +'" wins!');
+    },
 
   });
 
