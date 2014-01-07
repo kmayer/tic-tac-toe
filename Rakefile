@@ -5,7 +5,8 @@ require File.expand_path('../config/application', __FILE__)
 
 TicTacToe::Application.load_tasks
 
-class NoDBStrategy < HerokuSan::Deploy::Base
+begin
+  class NoDBStrategy < HerokuSan::Deploy::Base; end
+  HerokuSan.project = HerokuSan::Project.new(Rails.root.join("config","heroku.yml"), :deploy => NoDBStrategy)
+rescue
 end
-
-HerokuSan.project = HerokuSan::Project.new(Rails.root.join("config","heroku.yml"), :deploy => NoDBStrategy)
