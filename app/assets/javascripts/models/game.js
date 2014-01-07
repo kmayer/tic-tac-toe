@@ -20,10 +20,6 @@ app.module("Models", function (Models, app) {
         if (this.get('board').search(/\d/) == -1) return "DRAW";
       },
 
-      inspect: function() {
-        return rows(this.get('board')).join("\n");
-      },
-
       turn: function(position) {
         var board = this.get('board').split('');
         if (board[position] == position) {

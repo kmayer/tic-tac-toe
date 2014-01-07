@@ -3,10 +3,6 @@ describe("Models.Game", function () {
     this.model = new app.Models.Game();
   });
 
-  it("has an inspect", function() {
-    expect(this.model.inspect()).toBe("012\n345\n678");
-  });
-
   describe("ranks and files", function() {
     it("has status for all ranks", function() {
       var ranks = this.model.ranks();
