@@ -3,18 +3,13 @@ app.module("Models", function (Models, app) {
     return Backbone.Model.extend({
       tactics: ['arg', 'win_game', 'not_lose', 'default'],
 
-      takeTurn: function(position) {
-        this.get('game').turn(position);
-      },
-
       move: function(pos) {
         var player = this;
 
-        var position = _.chain(this.tactics)
+        return _.chain(this.tactics)
           .map(function(tactic) { return player[tactic].call(player, pos); })
           .reject(function(p) { return p === undefined; })
           .value()[0];
-        this.takeTurn(position);
       },
 
       /* TACTICS */
