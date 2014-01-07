@@ -20,6 +20,15 @@ describe("Models.Player", function () {
 
       expect(this.model.move()).toBe(4);
     });
+
+    it("prefer corners", function() {
+      spyOn(this.model, "default").and.callFake(function() { return undefined;} )
+      spyOn(_, "random").and.callFake(function() {return 4;} )
+
+      this.game.set({board: "012345678"});
+
+      expect(this.model.move()).toBe(8);
+    });
   });
 
   describe("bugs", function() {
@@ -33,6 +42,12 @@ describe("Models.Player", function () {
       this.game.set({board: "O1OOXXX78", thisPlayer: "X"})
 
       expect(this.model.move()).toBe(1);
+    });
+
+    it("should choose 7, not crash", function() {
+      this.game.set({board: "XOXXOOO7X", thisPlayer: "X"})
+
+      expect(this.model.move()).toBe(7);
     });
   });
 });
