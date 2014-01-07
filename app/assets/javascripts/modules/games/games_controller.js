@@ -21,7 +21,7 @@ app.module("GamesModule", function(thisModule, thisApp) {
         app.vent.trigger("draw");
       } else if (winner) {
         app.vent.trigger("winner", winner);
-      } else if (this.game.get('thisPlayer') == "X") {
+      } else if (this.game.get('nextPlayer') == "X") {
         app.execute("take:turn", this.player.move());
       }
     },

@@ -33,19 +33,19 @@ describe("Models.Player", function () {
 
   describe("bugs", function() {
     it("should choose 8, not 0", function() {
-      this.game.set({board: "O12XO5X78", thisPlayer: "X"});
+      this.game.set({board: "O12XO5X78", nextPlayer: "X"});
 
       expect(this.model.move()).toBe(8);
     });
 
     it("should choose 1, not 8", function() {
-      this.game.set({board: "O1OOXXX78", thisPlayer: "X"})
+      this.game.set({board: "O1OOXXX78", nextPlayer: "X"})
 
       expect(this.model.move()).toBe(1);
     });
 
     it("should choose 7, not crash", function() {
-      this.game.set({board: "XOXXOOO7X", thisPlayer: "X"})
+      this.game.set({board: "XOXXOOO7X", nextPlayer: "X"})
 
       expect(this.model.move()).toBe(7);
     });

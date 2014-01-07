@@ -3,7 +3,7 @@ app.module("Models", function (Models, app) {
     return Backbone.Model.extend({
       defaults: {
         board: "012345678",
-        thisPlayer: "X"
+        nextPlayer: "X"
       },
 
       ranks: function() {
@@ -22,19 +22,14 @@ app.module("Models", function (Models, app) {
 
       turn: function(position) {
         var board = this.get('board').split('');
+        var thisPlayer = this.get('nextPlayer')
         if (board[position] == position) {
-          board[position] = nextPlayer(this);
-          this.set('board', board.join(''));
+          board[position] = thisPlayer;
+          this.set({board: board.join(''), nextPlayer: ((thisPlayer === "X") ? "O" : "X")});
         }
       }
     });
   })();
-
-  function nextPlayer(model) {
-    var thisPlayer = model.get('thisPlayer');
-    model.set('thisPlayer',((thisPlayer === "X") ? "O" : "X"));
-    return thisPlayer;
-  }
 
   function rows(b) {
     return [
