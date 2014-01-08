@@ -15,6 +15,7 @@ app.module("GamesModule", function(thisModule, thisApp) {
     },
 
     takeTurn: function(position) {
+      if (this.game.get('winner')) return;
       this.game.turn(position);
       var winner = this.game.winner();
       if (winner === "DRAW") {

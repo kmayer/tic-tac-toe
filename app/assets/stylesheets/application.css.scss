@@ -20,7 +20,6 @@ $touchSize: 44px;
 
 .game-board {
   @include square($scale * 3 * $touchSize);
-  @include center-block();
   position: absolute;
   top: 50%; margin-top: -($scale * 3 * $touchSize)/2;
   left: 50%; margin-left: -($scale * 3 * $touchSize)/2
