@@ -13,9 +13,32 @@
  */
 
 @import "bootstrap-custom";
+@import "font-awesome";
 
-.table-cell-hover > tbody {
-  > tr > td:hover {
+$scale: 6;
+$touchSize: 44px;
+
+.game-board {
+  @include square($scale * 3 * $touchSize);
+  @include center-block();
+  position: absolute;
+  top: 50%; margin-top: -($scale * 3 * $touchSize)/2;
+  left: 50%; margin-left: -($scale * 3 * $touchSize)/2
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-cell {
+  font-size: $scale * 30px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid gray;
+  height: $scale * $touchSize;
+  width: $scale * $touchSize;
+  &:hover {
     background-color: darken($table-bg-active, 5%);
   }
 }

@@ -15,7 +15,7 @@ describe("GamesModule.GameView", function() {
 
     this.view.render();
 
-    this.view.$("td[data-position=0]").click();
+    this.view.$("div[data-position=0]").click();
 
     expect(spy).toHaveBeenCalledWith(0);
   });

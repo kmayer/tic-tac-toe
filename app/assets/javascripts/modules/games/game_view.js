@@ -1,18 +1,25 @@
 app.module("GamesModule", function(thisModule, thisApp) {
   thisModule.GameView = Marionette.ItemView.extend({
     template: HandlebarsTemplates['game'],
+    className: "game-board",
 
     modelEvents: {
       "change" : "render"
     },
 
     events: {
-      "click td[data-position]" : "cellClicked"
+      "click div[data-position]" : "cellClicked"
     },
 
     serializeData: function() {
       return _.inject(this.model.get('board').split(''), function(memo, position, index) {
-        memo["pos"+index] = (position == "X" || position == "O") ? position : "&nbsp;";
+        if (position == "X") {
+          memo["pos"+index] = "X";
+        } else if (position == "O") {
+          memo["pos"+index] = '<i class="fa fa-circle"></i>';
+        } else {
+          memo["pos"+index] = "&nbsp;";
+        }
         return memo;
       }, {})
     },
