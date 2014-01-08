@@ -7,7 +7,7 @@ app.module("Models", function (Models, app) {
       },
 
       ranks: function() {
-        var board = this.get('board');
+        var board = this.get("board");
         return _.union(rows(board), columns(board), diagonals(board));
       },
 
@@ -18,20 +18,20 @@ app.module("Models", function (Models, app) {
             if (rank === "XXX" || rank === "OOO") return true;
           });
           if (winner) return winner[0];
-          if (model.get('board').search(/\d/) == -1) return "DRAW";
+          if (model.get("board").search(/\d/) === -1) return "DRAW";
         }
 
-        this.set('winner', find_winner(this));
-        return this.get('winner');
+        this.set("winner", find_winner(this));
+        return this.get("winner");
       },
 
       turn: function(position) {
-        if (this.get('winner')) return;
-        var board = this.get('board').split('');
-        var thisPlayer = this.get('nextPlayer')
+        if (this.get("winner")) return;
+        var board = this.get("board").split("");
+        var thisPlayer = this.get("nextPlayer");
         if (board[position] == position) {
           board[position] = thisPlayer;
-          this.set({board: board.join(''), nextPlayer: ((thisPlayer === "X") ? "O" : "X")});
+          this.set({board: board.join(""), nextPlayer: ((thisPlayer === "X") ? "O" : "X")});
         }
       }
     });

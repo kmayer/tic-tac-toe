@@ -1,7 +1,7 @@
 app.module("Models", function (Models, app) {
   Models.Player = (function() {
     return Backbone.Model.extend({
-      tactics: ['arg', 'win_game', 'not_lose', 'preferred', 'default'],
+      tactics: ["arg", "win_game", "not_lose", "preferred", "default"],
 
       move: function(pos) {
         var player = this;
@@ -41,26 +41,26 @@ app.module("Models", function (Models, app) {
   }
 
   function pick_slot(model, regex) {
-    var openSlots = model.get('game').get('board').match(regex);
+    var openSlots = model.get("game").get("board").match(regex);
     if (openSlots) return Number(openSlots[_.random(openSlots.length - 1)]);
   }
 
   function find_runs(array, player) {
     var index;
-    var regex = RegExp(player, "g");
+    var regex = new RegExp(player, "g");
     _.find(array, function(rank, i) {
-      if (rank.replace(regex, '').length == 1) return index = i;
+      if (rank.replace(regex, '').length === 1) return index = i;
     });
     return index;
   }
 
   function find_run_with(model, letter) {
-    var ranks = _.filter(model.get('game').ranks(), function(rank) {
+    var ranks = _.filter(model.get("game").ranks(), function(rank) {
       return rank.match(/\d/);
     });
     var index = find_runs(ranks, letter);
     if (index !== undefined) {
-      return find_first_slot(ranks[index])
+      return find_first_slot(ranks[index]);
     }
   }
 });

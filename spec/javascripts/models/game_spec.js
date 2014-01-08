@@ -18,7 +18,7 @@ describe("Models.Game", function () {
       expect(this.model.winner()).toBeUndefined();
     });
 
-    it("announces a draw", function() {
+    it("detects a draw", function() {
       this.model = new app.Models.Game({board: "XOXOOXXXO"})
 
       expect(this.model.winner()).toBe("DRAW");
@@ -65,7 +65,15 @@ describe("Models.Game", function () {
       this.model.turn(1);
 
       expect(this.model.get('board')).toBe("XO2345678");
-    })
+    });
+
+    it("won't accept any more turns once the game is over", function() {
+      this.model.set('winner', "anything");
+
+      this.model.turn(0);
+
+      expect(this.model.get('board')).toBe("012345678");
+    });
   });
 
   it("plays a simple game where 'X' wins", function() {
