@@ -14,9 +14,9 @@ app.module("GamesModule", function(thisModule, thisApp) {
     serializeData: function() {
       return _.inject(this.model.get('board').split(''), function(memo, position, index) {
         if (position == "X") {
-          memo["pos"+index] = "X";
+          memo["pos"+index] = '<i class="fa fa-times"></i>';
         } else if (position == "O") {
-          memo["pos"+index] = '<i class="fa fa-circle"></i>';
+          memo["pos"+index] = '<i class="fa fa-circle-o"></i>';
         } else {
           memo["pos"+index] = "&nbsp;";
         }
