@@ -4,6 +4,8 @@ A Javascript version of Tic-Tac-Toe.
 
 Mostly an experiment.
 
+Try it online at http://ttt.bitwrangler.com
+
 == TODO
 
 * Add Guard
@@ -11,5 +13,3 @@ Mostly an experiment.
   * LiveReload
   * PhantomJS testing
   * JSHint testing
-
-* Deploy to Heroku
