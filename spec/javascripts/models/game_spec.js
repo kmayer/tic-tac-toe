@@ -61,7 +61,11 @@ describe("Models.Game", function () {
 
     it("won't overwrite a previous move", function() {
       this.model.turn(0);
-      this.model.turn(0);
+      try {
+        this.model.turn(0);
+      } catch (e) {
+        expect(e.message).toBe("Trying to take an already filled position, 0, X12345678");
+      }
       this.model.turn(1);
 
       expect(this.model.get('board')).toBe("XO2345678");

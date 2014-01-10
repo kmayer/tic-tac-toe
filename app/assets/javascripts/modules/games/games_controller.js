@@ -8,10 +8,10 @@ app.module("GamesModule", function(thisModule, thisApp) {
 
     new: function() {
       this.game = new app.Models.Game();
-      this.player = new app.Models.Player({game: this.game});
+      this.player = new app.Models.Player();
       var gameView = new app.GamesModule.GameView({model: this.game});
       thisApp.gameRegion.show(gameView);
-      app.execute("take:turn", this.player.move());
+      app.execute("take:turn", this.player.move(this.game));
     },
 
     takeTurn: function(position) {
@@ -25,7 +25,7 @@ app.module("GamesModule", function(thisModule, thisApp) {
       } else if (winner) {
         app.vent.trigger("winner", winner);
       } else if (this.game.get("nextPlayer") == "X") {
-        app.execute("take:turn", this.player.move());
+        app.execute("take:turn", this.player.move(this.game));
       }
     },
 

@@ -32,6 +32,8 @@ app.module("Models", function (Models, app) {
         if (board[position] == position) {
           board[position] = thisPlayer;
           this.set({board: board.join(""), nextPlayer: ((thisPlayer === "X") ? "O" : "X")});
+        } else {
+          throw {message: "Trying to take an already filled position, " + position + ", " + this.get("board")}
         }
       }
     });
